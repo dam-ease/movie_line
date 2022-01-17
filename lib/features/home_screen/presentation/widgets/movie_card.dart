@@ -22,7 +22,7 @@ class MovieCardWidget extends StatelessWidget {
       child: Column(
         children: [
           Container(
-              margin: const EdgeInsets.fromLTRB(155, 16, 15, 0),
+              margin: const EdgeInsets.fromLTRB(120, 16, 15, 0),
               padding: const EdgeInsets.fromLTRB(8, 6, 10, 6),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),

@@ -32,59 +32,72 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 28),
-                  Container(
-                      height: 191,
-                      decoration: BoxDecoration(
-                          image: const DecorationImage(
-                              image: AssetImage(streamImage),
-                              fit: BoxFit.cover),
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Container(
-                        alignment: Alignment.bottomLeft,
-                        margin: const EdgeInsets.fromLTRB(10, 109, 110, 10),
-                        padding: const EdgeInsets.fromLTRB(20, 11, 14, 16),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                                width: 1,
-                                color:
-                                    const Color.fromRGBO(255, 255, 255, 0.25)),
-                            color: const Color.fromRGBO(218, 218, 218, 0.3)),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Image(
-                              image: AssetImage(play),
-                              height: 35,
-                            ),
-                            SizedBox(
-                              width: ScreenUtil().setWidth(20),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Continue Watching',
-                                  style: headingStyle.copyWith(
-                                      fontSize: ScreenUtil().setSp(12),
-                                      color: const Color.fromRGBO(
-                                          188, 188, 188, 1)),
+                  Stack(
+                    children: <Widget>[
+                      ClipRRect(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30)),
+                          child: Container(
+                              decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(30),
                                 ),
-                                SizedBox(
-                                  height: ScreenUtil().setHeight(5),
-                                ),
-                                Text(
-                                  'Ready Player one',
-                                  style: headingStyle.copyWith(
-                                      fontSize: ScreenUtil().setSp(16),
-                                      color: const Color.fromRGBO(
-                                          255, 255, 255, 1)),
-                                )
-                              ],
-                            )
-                          ],
+                              ),
+                              child: const Image(
+                                  image: AssetImage(streamImage),
+                                  fit: BoxFit.cover))),
+                      Positioned(
+                        bottom: 0.0,
+                        right: ScreenUtil().setWidth(90),
+                        left: 0.0,
+                        child: Container(
+                          margin: const EdgeInsets.fromLTRB(10, 0, 0, 10),
+                          padding: const EdgeInsets.fromLTRB(20, 11, 14, 16),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                  width: 1,
+                                  color: const Color.fromRGBO(
+                                      255, 255, 255, 0.25)),
+                              color: const Color.fromRGBO(218, 218, 218, 0.3)),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Image(
+                                image: AssetImage(play),
+                                height: 35,
+                              ),
+                              SizedBox(
+                                width: ScreenUtil().setWidth(20),
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Continue Watching',
+                                    style: headingStyle.copyWith(
+                                        fontSize: ScreenUtil().setSp(12),
+                                        color: const Color.fromRGBO(
+                                            188, 188, 188, 1)),
+                                  ),
+                                  SizedBox(
+                                    height: ScreenUtil().setHeight(5),
+                                  ),
+                                  Text(
+                                    'Ready Player one',
+                                    style: headingStyle.copyWith(
+                                        fontSize: ScreenUtil().setSp(16),
+                                        color: const Color.fromRGBO(
+                                            255, 255, 255, 1)),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
                         ),
-                      )),
+                      )
+                    ],
+                  ),
                   const Padding(padding: EdgeInsets.fromLTRB(24, 0, 0, 24)),
                   Text(
                     'Trending',
