@@ -1,16 +1,5 @@
-# movie_line
+Movie Line
+A mobile application for movie streaming built with Flutter and The Movie Database API.
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Screenshot_1645039466](https://user-images.githubusercontent.com/53122008/154341138-2cfb9db6-b99d-4621-be8b-6a2ef17e9ad0.png)
+![Screenshot_1645039529](https://user-images.githubusercontent.com/53122008/154341160-b33ce043-bfb4-436d-9235-a9ffde42d793.png)
