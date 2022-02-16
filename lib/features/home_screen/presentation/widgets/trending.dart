@@ -32,8 +32,20 @@ class TrendingMovies extends ConsumerWidget {
             loading: () => const Center(
               child: CupertinoActivityIndicator(),
             ),
-            error: (e, _) => const Center(
-              child: Text('An Error Occured'),
+            error: (e, _) => CarouselSlider(
+              carouselController: controller,
+              items: movies.map((e) => MovieCardWidget(movie: e)).toList(),
+              options: CarouselOptions(
+                enableInfiniteScroll: false,
+                viewportFraction: 0.68,
+                height: 336,
+                enlargeCenterPage: true,
+                onPageChanged: (index, _) => controller.animateToPage(
+                  index,
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.ease,
+                ),
+              ),
             ),
           );
 }
