@@ -1,13 +1,10 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_line/features/home_screen/presentation/widgets/movie_card.dart';
+import 'package:movie_line/features/home_screen/presentation/widgets/trending.dart';
 import 'package:movie_line/utils/constants.dart';
 import 'package:movie_line/utils/gradient_text.dart';
-import 'package:movie_line/utils/movie_data.dart';
 
 class HomeScreen extends StatelessWidget {
-  CarouselController controller = CarouselController();
   @override
   Widget build(BuildContext context) => Scaffold(
         extendBodyBehindAppBar: true,
@@ -105,22 +102,7 @@ class HomeScreen extends StatelessWidget {
                         fontSize: ScreenUtil().setSp(24),
                         color: const Color.fromRGBO(255, 255, 255, 1)),
                   ),
-                  CarouselSlider(
-                    carouselController: controller,
-                    items:
-                        movies.map((e) => MovieCardWidget(movie: e)).toList(),
-                    options: CarouselOptions(
-                      enableInfiniteScroll: false,
-                      viewportFraction: 0.68,
-                      height: 336,
-                      enlargeCenterPage: true,
-                      onPageChanged: (index, _) => controller.animateToPage(
-                        index,
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.ease,
-                      ),
-                    ),
-                  ),
+                  TrendingMovies()
                 ],
               ),
             )
