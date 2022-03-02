@@ -1,14 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_line/core/models/result_model.dart';
+import 'package:movie_line/core/models/trending_model.dart';
 import 'package:movie_line/core/state/repositories/trending_repo.dart';
 
-final trendingRepoProvider = Provider((ref) => TrendingNotifier(ref.read));
+final trendingRepoProvider = StateNotifierProvider<TrendingRepo, TrendingState>(
+    (ref) => TrendingRepo(ref.read));
 
-final trendingListProvider =
-    FutureProvider.autoDispose<List<Result>>((ref) async {
+final trendingProvider = StateProvider<List<Movies>>((ref) {
   final repo = ref.watch(trendingRepoProvider);
-  final response = repo.getTrendingMovies();
-  ref.maintainState = true;
-
-  return response;
+  return repo.movies;
+});
+final trendingLoadingProvider = StateProvider<bool>((ref) {
+  final repo = ref.watch(trendingRepoProvider);
+  return repo.loading;
 });

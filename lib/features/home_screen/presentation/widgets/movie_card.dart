@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_line/core/models/movie.dart';
+import 'package:movie_line/core/models/result_model.dart';
 import 'package:movie_line/utils/constants.dart';
 
 class MovieCardWidget extends StatelessWidget {
-  final Movie? movie;
+  final Movies? movie;
 
   const MovieCardWidget({
     @required this.movie,
@@ -16,7 +17,10 @@ class MovieCardWidget extends StatelessWidget {
       margin: const EdgeInsets.only(top: 24),
       decoration: BoxDecoration(
         image: DecorationImage(
-            image: AssetImage('${movie!.imageUrl}'), fit: BoxFit.cover),
+            image: NetworkImage(movie!.backdropPath != null
+                ? 'https://image.tmdb.org/t/p/original/${movie!.backdropPath}'
+                : 'https://image.tmdb.org/t/p/original/${movie!.posterPath}'),
+            fit: BoxFit.cover),
         borderRadius: BorderRadius.circular(30),
       ),
       child: Column(
@@ -50,7 +54,7 @@ class MovieCardWidget extends StatelessWidget {
                         width: ScreenUtil().setWidth(5),
                       ),
                       Text(
-                        '${movie!.rating}',
+                        '${movie!.voteAverage}',
                         style: headingStyle.copyWith(
                             fontSize: ScreenUtil().setSp(16),
                             color: const Color.fromRGBO(255, 255, 255, 1)),
@@ -74,7 +78,11 @@ class MovieCardWidget extends StatelessWidget {
                   Expanded(
                       child: Center(
                           child: Text(
-                    '${movie!.movieName}',
+                    movie!.title != null
+                        ? '${movie!.title}'
+                        : movie!.originalTitle != null
+                            ? '${movie!.originalTitle}'
+                            : '${movie!.originalName}',
                     style: headingStyle.copyWith(
                         fontSize: ScreenUtil().setSp(16),
                         color: const Color.fromRGBO(255, 255, 255, 1)),

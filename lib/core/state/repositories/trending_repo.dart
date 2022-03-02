@@ -6,27 +6,32 @@ import 'package:movie_line/core/models/trending_model.dart';
 
 class TrendingState {
   bool loading;
-  TrendingState({this.loading = false});
+  List<Movies> movies = [];
+  TrendingState({this.loading = false, required this.movies});
 }
 
-class TrendingNotifier extends StateNotifier<TrendingState> {
+class TrendingRepo extends StateNotifier<TrendingState> {
   final Reader _read;
-  TrendingNotifier(this._read) : super(TrendingState());
+  TrendingRepo(this._read) : super(TrendingState(movies: []));
 
   final Dio client = Dio();
-  Future<List<Result>> getTrendingMovies({CancelToken? cancelToken}) async {
+
+  Future<List<Movies>> getTrendingMovies({CancelToken? cancelToken}) async {
+    print('here');
+    state = TrendingState(movies: [], loading: true);
     final response = await client.get(AppConfig.TMDB_URL + 'trending/all/day',
         queryParameters: {'api_key': AppConfig.TMDB_APIKEY},
         cancelToken: cancelToken);
 
-    final List<dynamic> data = response.data['results'] as List;
-    // print(data);
-    final trendingMovies = List<Result>.from(data.map((json) {
-      final trendingMovie = Result.fromJson(json);
+    final dynamic data = response.data['results'] as List;
 
-      return trendingMovie;
+    final movies = List<Movies>.from(data.map((json) {
+      final movie = Movies.fromJson(json);
+      return movie;
     }));
 
-    return trendingMovies;
+    state = TrendingState(loading: false, movies: movies);
+
+    return movies;
   }
 }

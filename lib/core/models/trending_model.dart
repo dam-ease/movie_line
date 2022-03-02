@@ -6,7 +6,7 @@ part 'trending_model.g.dart';
 @JsonSerializable()
 class Trending {
   int page;
-  List<Result> results;
+  List<Movies> results;
   int totalPages;
   int totalResults;
   Trending({
