@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_line/core/models/result_model.dart';
+import 'package:movie_line/core/state/providers/trending.dart';
+import 'package:movie_line/features/home_screen/presentation/widgets/continue.dart';
 import 'package:movie_line/features/home_screen/presentation/widgets/trending.dart';
 import 'package:movie_line/utils/constants.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_line/utils/gradient_text.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    context.read(trendingRepoProvider.notifier).getTrendingMovies();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         extendBodyBehindAppBar: true,
@@ -29,80 +44,36 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 28),
-                  Stack(
-                    children: <Widget>[
-                      ClipRRect(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(30)),
-                          child: Container(
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(30),
-                                ),
-                              ),
-                              child: const Image(
-                                  image: AssetImage(streamImage),
-                                  fit: BoxFit.cover))),
-                      Positioned(
-                        bottom: 0.0,
-                        right: ScreenUtil().setWidth(90),
-                        left: 0.0,
-                        child: Container(
-                          margin: const EdgeInsets.fromLTRB(10, 0, 0, 10),
-                          padding: const EdgeInsets.fromLTRB(20, 11, 14, 16),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(
-                                  width: 1,
-                                  color: const Color.fromRGBO(
-                                      255, 255, 255, 0.25)),
-                              color: const Color.fromRGBO(218, 218, 218, 0.3)),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Image(
-                                image: AssetImage(play),
-                                height: 35,
-                              ),
-                              SizedBox(
-                                width: ScreenUtil().setWidth(20),
-                              ),
-                              Column(
+                  Consumer(builder: (__, watch, _) {
+                    final List<Movies> movies = watch(trendingProvider).state;
+                    final bool isLoading = watch(trendingLoadingProvider).state;
+                    return isLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ))
+                        : movies.isNotEmpty
+                            ? Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Continue Watching',
-                                    style: headingStyle.copyWith(
-                                        fontSize: ScreenUtil().setSp(12),
-                                        color: const Color.fromRGBO(
-                                            188, 188, 188, 1)),
+                                  Continue(
+                                    movies: movies,
                                   ),
-                                  SizedBox(
-                                    height: ScreenUtil().setHeight(5),
-                                  ),
+                                  const SizedBox(height: 25),
                                   Text(
-                                    'Ready Player one',
+                                    'Trending',
                                     style: headingStyle.copyWith(
-                                        fontSize: ScreenUtil().setSp(16),
+                                        fontSize: ScreenUtil().setSp(24),
                                         color: const Color.fromRGBO(
                                             255, 255, 255, 1)),
+                                  ),
+                                  TrendingMovies(
+                                    movies: movies,
                                   )
                                 ],
                               )
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  const Padding(padding: EdgeInsets.fromLTRB(24, 0, 0, 24)),
-                  Text(
-                    'Trending',
-                    style: headingStyle.copyWith(
-                        fontSize: ScreenUtil().setSp(24),
-                        color: const Color.fromRGBO(255, 255, 255, 1)),
-                  ),
-                  TrendingMovies()
+                            : Container();
+                  })
                 ],
               ),
             )
