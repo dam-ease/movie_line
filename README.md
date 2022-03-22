@@ -3,8 +3,8 @@ A mobile application for movie streaming built with Flutter and The Movie Databa
 
 <table>
   <tr>
-    <td>Home Screen</td>
-     <td>Discover Screen</td>
+    <td>Discover Screen</td>
+     <td>Home Screen</td>
   </tr>
   <tr>
     <td><img src="https://user-images.githubusercontent.com/53122008/154341138-2cfb9db6-b99d-4621-be8b-6a2ef17e9ad0.png" width=270 height=480></td>
