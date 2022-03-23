@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_line/core/models/movie.dart';
 import 'package:movie_line/core/models/result_model.dart';
 import 'package:movie_line/utils/constants.dart';
+import 'package:movie_line/utils/page_router.dart';
+import 'package:movie_line/utils/route_name.dart';
 
 class MovieCardWidget extends StatelessWidget {
   final Movies? movie;
@@ -16,7 +18,7 @@ class MovieCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GestureDetector(
-      onTap: () {},
+      onTap: () => PageRouter.gotoNamed(RouteName.detail, context, args: movie),
       child: Stack(children: [
         CachedNetworkImage(
           fit: BoxFit.cover,

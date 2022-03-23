@@ -18,6 +18,7 @@ class Continue extends StatefulWidget {
 class _ContinueState extends State<Continue> {
   @override
   Widget build(BuildContext context) {
+    print(widget.movies.first.toJson());
     return GestureDetector(
       onTap: () {},
       child: Stack(

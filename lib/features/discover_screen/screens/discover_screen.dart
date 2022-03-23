@@ -96,7 +96,12 @@ class _DiscoverState extends State<Discover> with TickerProviderStateMixin {
             Expanded(
               child: TabBarView(
                 physics: const NeverScrollableScrollPhysics(),
-                children: const [Movies(), Movies(), Movies(), Movies()],
+                children: const [
+                  MovieScreen(),
+                  MovieScreen(),
+                  MovieScreen(),
+                  MovieScreen()
+                ],
                 controller: _tabController,
               ),
             )

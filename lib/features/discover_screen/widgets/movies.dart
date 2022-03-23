@@ -13,8 +13,8 @@ List title = [
   'Now You See Me 2 (2016)'
 ];
 
-class Movies extends StatelessWidget {
-  const Movies({Key? key}) : super(key: key);
+class MovieScreen extends StatelessWidget {
+  const MovieScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

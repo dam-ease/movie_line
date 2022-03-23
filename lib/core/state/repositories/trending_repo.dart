@@ -16,20 +16,23 @@ class TrendingRepo extends StateNotifier<TrendingState> {
   final Dio client = Dio();
 
   Future<List<Movies>> getTrendingMovies({CancelToken? cancelToken}) async {
-    state = TrendingState(movies: [], loading: true);
-    final response = await client.get(AppConfig.TMDB_URL + 'trending/all/day',
-        queryParameters: {'api_key': AppConfig.TMDB_APIKEY},
-        cancelToken: cancelToken);
+    try {
+      state = TrendingState(movies: [], loading: true);
+      final response = await client.get(AppConfig.TMDB_URL + 'trending/all/day',
+          queryParameters: {'api_key': AppConfig.TMDB_APIKEY},
+          cancelToken: cancelToken);
 
-    final dynamic data = response.data['results'] as List;
+      final dynamic data = response.data['results'] as List;
 
-    final movies = List<Movies>.from(data.map((json) {
-      final movie = Movies.fromJson(json);
-      return movie;
-    }));
+      final movies = List<Movies>.from(data.map((json) {
+        final movie = Movies.fromJson(json);
+        return movie;
+      }));
 
-    state = TrendingState(loading: false, movies: movies);
+      state = TrendingState(loading: false, movies: movies);
+    } on DioError catch (e) {
+    } catch (e) {}
 
-    return movies;
+    return state.movies;
   }
 }
