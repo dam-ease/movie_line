@@ -29,7 +29,7 @@ class _ScreenListState extends State<ScreenList> {
           crossAxisSpacing: 10,
           mainAxisSpacing: 15,
           shrinkWrap: true,
-          itemCount: 6,
+          itemCount: widget.screen.length,
           itemBuilder: (BuildContext context, int index) {
             final movie = widget.screen[index];
             final images = movie.backdropPath != null
