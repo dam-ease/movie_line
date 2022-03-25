@@ -6,7 +6,7 @@ import 'package:movie_line/core/state/providers/trending.dart';
 import 'package:movie_line/features/home_screen/presentation/widgets/movie_card.dart';
 
 class TrendingMovies extends StatefulWidget {
-  final List<Movies> movies;
+  final List<Result> movies;
   const TrendingMovies({Key? key, required this.movies}) : super(key: key);
 
   @override

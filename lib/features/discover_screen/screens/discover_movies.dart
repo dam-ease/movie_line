@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movie_line/core/state/providers/movies.dart';
 import 'package:movie_line/features/discover_screen/widgets/movies.dart';
 import 'package:movie_line/utils/constants.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Discover extends StatefulWidget {
-  const Discover({Key? key}) : super(key: key);
+class DiscoverMovies extends StatefulWidget {
+  const DiscoverMovies({Key? key}) : super(key: key);
 
   @override
-  State<Discover> createState() => _DiscoverState();
+  State<DiscoverMovies> createState() => _DiscoverMoviesState();
 }
 
-class _DiscoverState extends State<Discover> with TickerProviderStateMixin {
+class _DiscoverMoviesState extends State<DiscoverMovies>
+    with TickerProviderStateMixin {
   late TabController _tabController;
 
   void initState() {
+    context.read(moviesRepoProvider.notifier).getNowPlayingMovies();
+    context.read(popularMovieRepoProvider.notifier).getPopularMovies();
+    context.read(topRatedMovieRepoProvider.notifier).getTopRatedMovies();
+    context.read(upcomingMovieRepoProvider.notifier).getUpcomingMovies();
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
   }
@@ -30,6 +38,7 @@ class _DiscoverState extends State<Discover> with TickerProviderStateMixin {
       extendBodyBehindAppBar: true,
       body: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               padding: const EdgeInsets.fromLTRB(24, 36, 68, 20),
@@ -44,7 +53,7 @@ class _DiscoverState extends State<Discover> with TickerProviderStateMixin {
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
                       width: 1, color: const Color.fromRGBO(33, 31, 48, 1))),
-              margin: const EdgeInsets.fromLTRB(24, 0, 24, 15),
+              margin: const EdgeInsets.fromLTRB(24, 0, 24, 0),
               child: TextFormField(
                 style: GoogleFonts.inter(
                     fontWeight: FontWeight.w500,
@@ -66,6 +75,16 @@ class _DiscoverState extends State<Discover> with TickerProviderStateMixin {
                     hintText: 'Sherlock Holmes'),
               ),
             ),
+            Container(
+              padding: const EdgeInsets.fromLTRB(24, 15, 68, 5),
+              child: Text(
+                'Movies',
+                style: headingStyle.copyWith(
+                    fontSize: ScreenUtil().setSp(18),
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white),
+              ),
+            ),
             TabBar(
               labelPadding: EdgeInsets.zero,
               indicatorWeight: 5,
@@ -78,29 +97,27 @@ class _DiscoverState extends State<Discover> with TickerProviderStateMixin {
                   borderRadius: BorderRadius.all(Radius.circular(5))),
               tabs: const <Tab>[
                 Tab(
-                  text: 'Movies',
+                  text: 'Now Playing',
                 ),
                 Tab(
-                  text: 'Tv Series',
+                  text: 'Popular',
                 ),
                 Tab(
-                  text: 'Documentary',
+                  text: 'Top Rated',
                 ),
                 Tab(
-                  text: 'Sports',
+                  text: 'Upcoming',
                 )
               ],
               controller: _tabController,
-              physics: const NeverScrollableScrollPhysics(),
             ),
             Expanded(
               child: TabBarView(
-                physics: const NeverScrollableScrollPhysics(),
                 children: const [
-                  MovieScreen(),
-                  MovieScreen(),
-                  MovieScreen(),
-                  MovieScreen()
+                  NowPlayingMovieScreen(),
+                  PopularMovieScreen(),
+                  TopRatedMovieScreen(),
+                  UpcomingMovieScreen(),
                 ],
                 controller: _tabController,
               ),

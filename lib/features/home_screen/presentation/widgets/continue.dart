@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_line/core/models/result_model.dart';
-import 'package:movie_line/core/state/providers/trending.dart';
 import 'package:movie_line/utils/constants.dart';
+import 'package:movie_line/utils/page_router.dart';
+import 'package:movie_line/utils/route_name.dart';
 
 class Continue extends StatefulWidget {
-  final List<Movies> movies;
+  final Result movies;
   const Continue({Key? key, required this.movies}) : super(key: key);
 
   @override
@@ -18,16 +18,16 @@ class Continue extends StatefulWidget {
 class _ContinueState extends State<Continue> {
   @override
   Widget build(BuildContext context) {
-    print(widget.movies.first.toJson());
     return GestureDetector(
-      onTap: () {},
+      onTap: () =>
+          PageRouter.gotoNamed(RouteName.detail, context, args: widget.movies),
       child: Stack(
         children: <Widget>[
           CachedNetworkImage(
             fit: BoxFit.cover,
-            imageUrl: widget.movies.last.backdropPath != null
-                ? 'https://image.tmdb.org/t/p/original/${widget.movies.last.backdropPath}'
-                : 'https://image.tmdb.org/t/p/original/${widget.movies.last.posterPath}',
+            imageUrl: widget.movies.backdropPath != null
+                ? 'https://image.tmdb.org/t/p/original/${widget.movies.backdropPath}'
+                : 'https://image.tmdb.org/t/p/original/${widget.movies.posterPath}',
             imageBuilder: (context, imageProvider) => ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(30)),
               child: Container(

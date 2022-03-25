@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_line/features/detail_screen/screens/detail_screen.dart';
-import 'package:movie_line/features/discover_screen/screens/discover_screen.dart';
+import 'package:movie_line/features/discover_screen/screens/discover_movies.dart';
+import 'package:movie_line/features/discover_screen/screens/discover_tv.dart';
 import 'package:movie_line/features/home_screen/presentation/screens/home_screen.dart';
 import 'package:movie_line/utils/constants.dart';
 
@@ -17,8 +18,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   List<Widget> _pages = <Widget>[
     HomeScreen(),
-    Discover(),
-    HomeScreen(),
+    DiscoverMovies(),
+    DiscoverTv(),
   ];
 
   void _onItemTapped(int index) {

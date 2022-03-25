@@ -6,6 +6,8 @@ import 'package:movie_line/features/home_screen/presentation/widgets/bottom_nav_
 import 'package:movie_line/utils/constants.dart';
 import 'package:movie_line/utils/route_configuration.dart';
 import 'package:movie_line/utils/route_name.dart';
+import 'package:movie_line/utils/routes.dart';
+import 'package:oktoast/oktoast.dart';
 
 void main() {
   runApp(ProviderScope(child: MovieLine()));
@@ -13,14 +15,18 @@ void main() {
 
 class MovieLine extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => ScreenUtilInit(
-        designSize: const Size(375, 812),
-        builder: () => MaterialApp(
-          theme: ThemeData(scaffoldBackgroundColor: bgColor),
-          debugShowCheckedModeBanner: false,
-          title: 'Movie Line',
-          initialRoute: RouteName.root,
-          onGenerateRoute: RouteConfiguration.onGenerateRoute,
+  Widget build(BuildContext context) => OKToast(
+        duration: Duration(seconds: 2),
+        movingOnWindowChange: true,
+        child: ScreenUtilInit(
+          designSize: const Size(375, 812),
+          builder: () => MaterialApp(
+            theme: ThemeData(scaffoldBackgroundColor: bgColor),
+            debugShowCheckedModeBanner: false,
+            title: 'Movie Line',
+            initialRoute: RouteName.root,
+            onGenerateRoute: Routes.generateRoute,
+          ),
         ),
       );
 }

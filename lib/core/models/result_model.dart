@@ -4,7 +4,7 @@ import 'package:movie_line/core/models/enums.dart';
 part 'result_model.g.dart';
 
 @JsonSerializable()
-class Movies {
+class Result {
   String? overview;
   int? id;
   bool? adult;
@@ -14,8 +14,21 @@ class Movies {
   String? originalLanguage;
   String? originalTitle;
   String? posterPath;
+  String? logoPath;
   int? voteCount;
   bool? video;
+  String? belongsToCollection;
+  int? budget;
+  List? genres;
+  String? homePage;
+  int? imdbId;
+  List? productionCompanies;
+  List? productionCountries;
+  int? revenue;
+  int? runtime;
+  List? spokenLanguages;
+  String? tagLine;
+  String? status;
   double? voteAverage;
   DateTime? releaseDate;
   double? popularity;
@@ -25,7 +38,7 @@ class Movies {
   DateTime? firstAirDate;
   List<String>? originCountry;
 
-  Movies({
+  Result({
     this.overview,
     this.id,
     this.adult,
@@ -35,9 +48,22 @@ class Movies {
     this.originalLanguage,
     this.originalTitle,
     this.posterPath,
+    this.logoPath,
     this.voteCount,
     this.video,
     this.voteAverage,
+    this.belongsToCollection,
+    this.budget,
+    this.homePage,
+    this.imdbId,
+    this.productionCompanies,
+    this.productionCountries,
+    this.revenue,
+    this.runtime,
+    this.spokenLanguages,
+    this.status,
+    this.tagLine,
+    this.genres,
     this.releaseDate,
     this.popularity,
     this.mediaType,
@@ -47,7 +73,7 @@ class Movies {
     this.originCountry,
   });
 
-  factory Movies.fromJson(Map<String, dynamic> json) => _$MoviesFromJson(json);
+  factory Result.fromJson(Map<String, dynamic> json) => _$ResultFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MoviesToJson(this);
+  Map<String, dynamic> toJson() => _$ResultToJson(this);
 }

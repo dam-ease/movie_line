@@ -9,7 +9,7 @@ import 'package:movie_line/utils/page_router.dart';
 import 'package:movie_line/utils/route_name.dart';
 
 class MovieCardWidget extends StatelessWidget {
-  final Movies? movie;
+  final Result? movie;
 
   const MovieCardWidget({
     @required this.movie,

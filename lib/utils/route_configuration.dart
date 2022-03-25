@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_line/core/models/result_model.dart';
 import 'package:movie_line/features/detail_screen/screens/detail_screen.dart';
-import 'package:movie_line/features/discover_screen/screens/discover_screen.dart';
+import 'package:movie_line/features/discover_screen/screens/discover_movies.dart';
 import 'package:movie_line/features/home_screen/presentation/screens/home_screen.dart';
 import 'package:movie_line/features/home_screen/presentation/widgets/bottom_nav_bar.dart';
 import 'package:movie_line/utils/route_name.dart';
@@ -23,13 +23,13 @@ class RouteConfiguration {
     ),
     Path(
       r'^' + RouteName.discoverScreen + '\$',
-      (_) => MaterialPageRoute(builder: (context) => Discover()),
+      (_) => MaterialPageRoute(builder: (context) => DiscoverMovies()),
     ),
     Path(
         r'^' + RouteName.detail + '\$',
         (settings) => MaterialPageRoute(
             builder: (context) =>
-                DetailScreen(movie: settings.arguments as Movies),
+                DetailScreen(movie: settings.arguments as Result),
             settings: settings)),
     Path(r'^' + RouteName.root + '\$',
         (_) => MaterialPageRoute(builder: (context) => BottomNavBar()), false),
@@ -55,7 +55,7 @@ class RouteConfiguration {
         builder = (_) => HomeScreen();
         break;
       case RouteName.discoverScreen:
-        builder = (_) => Discover();
+        builder = (_) => DiscoverMovies();
         break;
       default:
         builder = (_) => BottomNavBar();
