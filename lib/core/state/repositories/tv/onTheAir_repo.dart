@@ -28,7 +28,6 @@ class OnTheAirRepo extends StateNotifier<OnTheAirState> {
         final tvShow = Result.fromJson(json);
         return tvShow;
       }));
-
       state = OnTheAirState(loading: false, tvShows: tvShows);
     } on DioError catch (e) {
     } catch (e) {}

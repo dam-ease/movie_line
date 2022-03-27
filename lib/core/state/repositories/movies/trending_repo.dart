@@ -10,8 +10,8 @@ class TrendingState {
 }
 
 class TrendingRepo extends StateNotifier<TrendingState> {
-  final Reader _read;
-  TrendingRepo(this._read) : super(TrendingState(movies: []));
+  // final Reader _read;
+  TrendingRepo() : super(TrendingState(movies: []));
 
   final Dio client = Dio();
 

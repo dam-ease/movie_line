@@ -30,9 +30,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
   json_serializable: ^4.1.4
   build_runner: ^2.0.6
   flutter_lints: ^1.0.0
+  mocktail: ^0.3.0
 
 flutter:
 
